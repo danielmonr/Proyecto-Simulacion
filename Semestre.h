@@ -3,9 +3,10 @@
 
 class Semestre{
 private:
-  int num_alumnos;
+  int id;
 public:
-  Semestre(int);
+  Semestre(int, int);
   ~Semestre();
   void printInfo();
+  int num_alumnos;
 };

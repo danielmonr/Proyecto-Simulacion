@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "Simulacion.h"
+#include "Institucion.h"
 
 using namespace std;
 
@@ -14,8 +15,12 @@ int main(int argc, char* argv[]){
 		cout << "Not implemented.\n";
 		exit(0);
 	}
-	string archivo = (argc>1)? string(argv[1]) : "valoresIniciales.csv";
-	CrearSimulaciones(archivo);
+
+	Institucion* inst = new Institucion(1,4,6,20);
+	inst->printInfo();
+
+	/*string archivo = (argc>1)? string(argv[1]) : "valoresIniciales.csv";
+	CrearSimulaciones(archivo);*/
 }
 
 void CrearSimulaciones(string f){

@@ -5,7 +5,14 @@
 
 class Institucion{
 private:
-    int Nalumnos;
-    std::vector<Carrera> carreras;
+  int id;
+  int NCarreras;
+  int NSemestres;
+  int Nalumnos;
+  int NProfesores;
+  std::vector<Carrera> carreras;
 public:
+  Institucion(int, int, int, int);
+  ~Institucion();
+  void printInfo();
 };

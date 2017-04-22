@@ -6,8 +6,11 @@
 class Carrera{
 private:
   std::vector<Semestre> semestres;
+  int num_semestres;
+  int num_alumnos_semestre;
+  int id;
 public:
-  Carrera();
+  Carrera(int, int, int);
   ~Carrera();
-  printInfo();
+  void printInfo();
 };
