@@ -7,4 +7,7 @@ class Carrera{
 private:
   std::vector<Semestre> semestres;
 public:
+  Carrera();
+  ~Carrera();
+  printInfo();
 };

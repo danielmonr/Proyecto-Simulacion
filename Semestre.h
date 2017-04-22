@@ -5,7 +5,7 @@ class Semestre{
 private:
   int num_alumnos;
 public:
-  Semestre();
+  Semestre(int);
   ~Semestre();
-  printInfo();
+  void printInfo();
 };
