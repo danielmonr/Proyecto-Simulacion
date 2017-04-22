@@ -28,3 +28,7 @@ Variables Calculadas:
 Variables aleatorias:
  - Numero de Alumnos aplicando para nuevo ingreso
  - Numero de bajas de Alumnos
+
+
+
+Numero maximo de alumnos = Numero de aulas * capacidad de aula * horas de aula  
