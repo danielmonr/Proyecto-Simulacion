@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <vector>
 #include "Simulacion.h"
-#include "Institucion.h"
+#include "helpers.h"
 
 using namespace std;
 
@@ -16,11 +16,11 @@ int main(int argc, char* argv[]){
 		exit(0);
 	}
 
-	Institucion* inst = new Institucion(1,4,6,20);
-	inst->printInfo();
+	/*Institucion* inst = new Institucion(1,4,6,20);
+	inst->printInfo();*/
 
-	/*string archivo = (argc>1)? string(argv[1]) : "valoresIniciales.csv";
-	CrearSimulaciones(archivo);*/
+	string archivo = (argc>1)? string(argv[1]) : "valoresIniciales.csv";
+	CrearSimulaciones(archivo);
 }
 
 void CrearSimulaciones(string f){
@@ -29,7 +29,7 @@ void CrearSimulaciones(string f){
 	ifs.open(f, ifstream::in);
 	getline(ifs, line);
 	while(getline(ifs, line)){
-		int vars[9];
+		int vars[3];
 		int cont = 0;
 		string temp = "";
 		line += ",";
@@ -43,7 +43,7 @@ void CrearSimulaciones(string f){
 				temp += line[i];
 			}
 		}
-		sims.push_back(Simulacion(vars[0],vars[1],vars[2],vars[3],vars[4],vars[5],vars[6],vars[7],vars[8]));
+		sims.push_back(Simulacion(vars[0],vars[1],vars[2]));
 	}
 	ifs.close();
 }

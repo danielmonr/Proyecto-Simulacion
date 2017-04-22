@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+#include "Institucion.h"
+#include "helpers.h"
 
 #define HOURS_PER_CLASSR 7
 #define HOURS_PER_CLASS 1
@@ -10,10 +12,10 @@ using namespace std;
 
 class Simulacion{
 	private:
-		const int NAulas,CAula,NCarreras,NMateriasTC,NMateriasE,NProfesoresP,NAlumnos,NMateriasS,NmateriasP;
-		int MAX_AL, OUT_AL, NProfesoresE, NUM_SEM;
+		Institucion* institucion;
+		const int NCarreras,NAlumnos,NSemestres;
 	protected:
 	public:
-		Simulacion(int,int,int,int,int,int,int,int,int);
+		Simulacion(int,int,int);
 		~Simulacion();
 };

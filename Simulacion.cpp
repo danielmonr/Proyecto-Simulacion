@@ -1,10 +1,13 @@
 #include "Simulacion.h"
 
 Simulacion::~Simulacion(){
-
+  //delete(institucion);
 }
 
-Simulacion::Simulacion(int NAulas,int CAula,int NCarreras,int NMateriasTC,int NMateriasE,int NProfesoresP,int NAlumnos,int NMateriasS,int NmateriasP) :
-    NAulas(NAulas),CAula(CAula),NCarreras(NCarreras),NMateriasTC(NMateriasTC),NMateriasE(NMateriasE),NProfesoresP(NProfesoresP),NAlumnos(NAlumnos),NMateriasS(NMateriasS),NmateriasP(NmateriasP)
+Simulacion::Simulacion(int NCarreras,int NSemestres,int NAlumnos) :
+  NCarreras(NCarreras),NAlumnos(NAlumnos), NSemestres(NSemestres)
 {
+  institucion = new Institucion(1, NCarreras, NSemestres, NAlumnos);
+  institucion->printInfo();
+
 }
