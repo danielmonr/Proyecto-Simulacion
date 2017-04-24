@@ -18,3 +18,9 @@ void Institucion::printInfo(){
     item.printInfo();
   }
 }
+
+void Institucion::AvanzarSemestre(){
+  for(auto item:carreras){
+    item.AvanzarSemestre();
+  }
+}

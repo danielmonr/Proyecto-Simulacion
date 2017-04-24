@@ -14,5 +14,6 @@ private:
 public:
   Institucion(int, int, int, int);
   ~Institucion();
+  void AvanzarSemestre();
   void printInfo();
 };

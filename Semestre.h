@@ -4,6 +4,7 @@
 class Semestre{
 private:
   int id;
+  int quedados;
 public:
   Semestre(int, int);
   ~Semestre();

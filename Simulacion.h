@@ -12,10 +12,12 @@ using namespace std;
 
 class Simulacion{
 	private:
-		Institucion* institucion;
+
 		const int NCarreras,NAlumnos,NSemestres;
 	protected:
 	public:
+		Institucion* institucion;
 		Simulacion(int,int,int);
 		~Simulacion();
+		void CorrerSimulacion();
 };

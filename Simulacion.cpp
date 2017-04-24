@@ -9,5 +9,8 @@ Simulacion::Simulacion(int NCarreras,int NSemestres,int NAlumnos) :
 {
   institucion = new Institucion(1, NCarreras, NSemestres, NAlumnos);
   institucion->printInfo();
+}
 
+void Simulacion::CorrerSimulacion(){
+  institucion->AvanzarSemestre();
 }

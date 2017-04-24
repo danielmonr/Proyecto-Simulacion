@@ -32,3 +32,10 @@ Variables aleatorias:
 
 
 Numero maximo de alumnos = Numero de aulas * capacidad de aula * horas de aula  
+
+
+
+
+tabla de probs
+
+rangosup, val,
