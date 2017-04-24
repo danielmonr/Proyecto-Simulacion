@@ -5,7 +5,7 @@
 
 class Carrera{
 private:
-  std::vector<Semestre> semestres;
+  std::vector<Semestre*> semestres;
   int init_al;
   int num_semestres;
   int num_alumnos_semestre;

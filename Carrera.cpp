@@ -3,7 +3,7 @@
 Carrera::Carrera(int i,int n,int s) : id(i),num_semestres(n), num_alumnos_semestre(s){
   init_al = num_alumnos_semestre;
   for(int i = 0; i < num_semestres; ++i){
-    semestres.push_back(Semestre(i+1, num_alumnos_semestre));
+    semestres.push_back(new Semestre(i+1, num_alumnos_semestre));
   }
 }
 
@@ -16,30 +16,31 @@ void Carrera::printInfo(){
   int sum = 0;
   for(auto item:semestres){
     std::cout << "\t";
-    item.printInfo();
-    sum += item.num_alumnos;
+    item->printInfo();
+    sum += item->num_alumnos;
   }
   std::cout << "\tTotal de Alumnos: " << sum << std::endl;
 }
 
 void Carrera::AvanzarSemestre(){
-  int quedadosAnterior = 0;
+  int quedadosSiguiente = alpha();
   int quedadosPresente = 0;
-  for(int i = 0; i < semestres.size(); ++i){
+  for(int i = semestres.size()-2; i > 0; --i){
     quedadosPresente = alpha();
-    std::cout << "Alpha de " << i << ": " << quedadosPresente << '\n';
-    if(i == semestres.size()-1){
-      std::cout << "Graduados: " << (semestres.at(i).num_alumnos)- quedadosPresente << std::endl;
+    std::cout << "Alpha de " << i << ": " << quedadosSiguiente << '\n';
+    if(i == semestres.size()-2){
+      std::cout << "Graduados: " << (semestres.at(i+1)->num_alumnos)- quedadosSiguiente << std::endl;
     }
-    semestres.at(i).num_alumnos = quedadosPresente;
-    semestres.at(i).num_alumnos += (i > 0)? (semestres.at(i-1).num_alumnos) - quedadosAnterior : AlumnosNuevoIngreso();
-    quedadosAnterior = quedadosPresente;
+    semestres.at(i+1)->num_alumnos = quedadosSiguiente + semestres.at(i)->num_alumnos - quedadosPresente;
+    quedadosSiguiente = quedadosPresente;
   }
+  //semestres.at(0)->num_alumnos = 0;
+  semestres.at(0)->num_alumnos = AlumnosNuevoIngreso() + quedadosSiguiente;
 }
 
 int Carrera::alpha(){
   // Numero de alumnos que se quedan en el semestre
-  return 0;
+  return 2;
 }
 
 int Carrera::AlumnosNuevoIngreso(){
