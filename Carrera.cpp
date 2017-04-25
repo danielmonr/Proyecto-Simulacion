@@ -5,6 +5,7 @@ Carrera::Carrera(int i,int n,int s) : id(i),num_semestres(n), num_alumnos_semest
   for(int i = 0; i < num_semestres; ++i){
     semestres.push_back(new Semestre(i+1, num_alumnos_semestre));
   }
+  CrearTabla();
 }
 
 Carrera::~Carrera(){
@@ -39,7 +40,16 @@ void Carrera::AvanzarSemestre(){
 }
 
 int Carrera::alpha(){
+  /*int root = 165231, a = 8121, m = 134456, c = 28411;
+  root = Helper::congruencial(root, a, m, c);
+  float aleatorio = (float)root/(float)m;
   // Numero de alumnos que se quedan en el semestre
+  for(auto fila:tabla_t.matrix){
+    if(aleatorio < fila.first){
+      return fila.second;
+    }
+  }*/
+
   return 2;
 }
 
@@ -47,4 +57,18 @@ int Carrera::AlumnosNuevoIngreso(){
   srand((int)time(NULL));
   int por = init_al/10;
   return (rand()%(int)(por*2))+ (init_al - por);
+}
+
+void Carrera::CrearTabla(){
+  /*num_filas = num_alumnos_semestre / 10;
+  lim_inf = 0;
+  lim_sup = num_alumnos_semestre / 10;
+  float per_adv = (1/(float)(num_filas));
+  float per = per_adv;
+  int val = lim_inf;
+  for(int i = 0; i < num_filas; ++i){
+    matrix.push_back(std::make_pair(per,val));
+    per += per_adv;
+    val += (lim_sup - lim_inf)/num_filas;
+  }*/
 }
