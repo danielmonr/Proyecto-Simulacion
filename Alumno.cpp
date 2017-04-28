@@ -6,7 +6,7 @@ Alumno::Alumno(int s){
 
 bool Alumno::aprobar(){
   srand((int) time(NULL));
-  if(rand()%101 < 70){
+  if(rand()%101 > 96){
     reprobadas++;
     return false;
   }

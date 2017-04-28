@@ -14,23 +14,23 @@ Simulacion::Simulacion(int NCarreras,int NSemestres,int NAlumnos, int NP) :
 
 void Simulacion::CorrerSimulacion(){
   institucion->AvanzarSemestre();
-  PrintState();
+  //PrintState();
 }
 
 void Simulacion::PrintState(){
   Helper::clearScreen();
-  int val = (NAlumnos*NSemestres)/50;
-  int cant = val*institucion->TotalAlumnos();
-  int cantg = val*institucion->TotalGraduados();
-  int cantr = val*institucion->TotalReprobados();
-  int cante = val*institucion->TotalExpulsados();
-  int cantd = val*institucion->num_drops;
+  float val = ((NAlumnos*NSemestres*NCarreras)/100)*2;
+  int cant = institucion->TotalAlumnos()/val;
+  int cantg = institucion->TotalGraduados()/val;
+  int cantr = institucion->TotalReprobados()/val;
+  int cante = institucion->TotalExpulsados()/val;
+  int cantd = institucion->num_drops/val;
   cout << "Alumnos institucion:" << string(cant, '|') << endl;
   cout << "Graduados: " << string(cantg, '|') << endl;
   cout << "Reprobados:" << string(cantr, '|') << endl;
   cout << "Expulsados:" << string(cante, '|') << endl;
   cout << "Drop Outs: " << string(cantd, '|') << endl;
   for(auto carr:institucion->carreras){
-    cout << "Carrera " << carr->id << ":" << string(val*carr->alumnos.size(), '|')<<endl;
+    cout << "Carrera " << carr->id << ":" << string(carr->alumnos.size()/val, '|')<<endl;
   }
 }

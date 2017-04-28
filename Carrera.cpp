@@ -30,14 +30,15 @@ void Carrera::printInfo(){
 
 void Carrera::AvanzarSemestre(){
   num_reprobados = 0;
+  num_expulsados = 0;
   for (auto al:alumnos){
     num_reprobados = (al->aprobar())? num_reprobados : num_reprobados+1;
   }
   for(int i = 0; i < alumnos.size(); ++i){
     //std::cout << "Alumnos:" << alumnos.size() << " - i: " << i << "\n";
     if(alumnos.at(i)->reprobadas >= 3){
-      alumnos.erase(alumnos.begin() + i);
-      //std::cout << "######################Erase, long:" << alumnos.size() << "\n";
+      //alumnos.erase(alumnos.begin() + i);
+      std::cout << "######################Erase, long:" << alumnos.at(i)->reprobadas << "\n";
       num_expulsados++;
       i = (i > 0)? i-1: 0;
     }
