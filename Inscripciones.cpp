@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <unistd.h>
 #include <vector>
 #include "Simulacion.h"
 #include "helpers.h"
@@ -22,10 +23,15 @@ int main(int argc, char* argv[]){
 	string archivo = (argc>1)? string(argv[1]) : "valoresIniciales.csv";
 	CrearSimulaciones(archivo);
 
+	cout << "Numero de semestres: ";
+	int numsims;
+	cin >> numsims;
+
 	for(auto simulacion:sims){
-		simulacion.CorrerSimulacion();
-		cout << "\n\n";
-		simulacion.institucion->printInfo();
+		for(int i = 0; i < numsims; ++i){
+			simulacion.CorrerSimulacion();
+			sleep(1);
+		}
 	}
 }
 
@@ -35,7 +41,7 @@ void CrearSimulaciones(string f){
 	ifs.open(f, ifstream::in);
 	getline(ifs, line);
 	while(getline(ifs, line)){
-		int vars[3];
+		int vars[4];
 		int cont = 0;
 		string temp = "";
 		line += ",";
@@ -49,7 +55,7 @@ void CrearSimulaciones(string f){
 				temp += line[i];
 			}
 		}
-		sims.push_back(Simulacion(vars[0],vars[1],vars[2]));
+		sims.push_back(Simulacion(vars[0],vars[1],vars[2], vars[3]));
 	}
 	ifs.close();
 }

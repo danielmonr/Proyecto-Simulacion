@@ -29,36 +29,28 @@ void Carrera::printInfo(){
 }
 
 void Carrera::AvanzarSemestre(){
+  num_reprobados = 0;
   for (auto al:alumnos){
     num_reprobados = (al->aprobar())? num_reprobados : num_reprobados+1;
   }
   for(int i = 0; i < alumnos.size(); ++i){
+    //std::cout << "Alumnos:" << alumnos.size() << " - i: " << i << "\n";
     if(alumnos.at(i)->reprobadas >= 3){
       alumnos.erase(alumnos.begin() + i);
+      //std::cout << "######################Erase, long:" << alumnos.size() << "\n";
       num_expulsados++;
-      i--;
+      i = (i > 0)? i-1: 0;
     }
     if(alumnos.at(i)->semestre > num_semestres){
       num_graduados++;
       alumnos.erase(alumnos.begin() + i);
-      i--;
+      //std::cout << "######################Erase, long:" << alumnos.size() << "\n";
+
+      i = (i > 0)? i-1: 0;
     }
   }
 }
 
-int Carrera::alpha(){
-  /*int root = 165231, a = 8121, m = 134456, c = 28411;
-  root = Helper::congruencial(root, a, m, c);
-  float aleatorio = (float)root/(float)m;
-  // Numero de alumnos que se quedan en el semestre
-  for(auto fila:tabla_t.matrix){
-    if(aleatorio < fila.first){
-      return fila.second;
-    }
-  }*/
-
-  return 2;
-}
 
 void Carrera::AlumnosNuevoIngreso(){
   srand((int)time(NULL));
@@ -67,18 +59,4 @@ void Carrera::AlumnosNuevoIngreso(){
   for(int i = 0; i < numnuev; ++i){
     alumnos.push_back(new Alumno(1));
   }
-}
-
-void Carrera::CrearTabla(){
-  /*num_filas = num_alumnos_semestre / 10;
-  lim_inf = 0;
-  lim_sup = num_alumnos_semestre / 10;
-  float per_adv = (1/(float)(num_filas));
-  float per = per_adv;
-  int val = lim_inf;
-  for(int i = 0; i < num_filas; ++i){
-    matrix.push_back(std::make_pair(per,val));
-    per += per_adv;
-    val += (lim_sup - lim_inf)/num_filas;
-  }*/
 }
