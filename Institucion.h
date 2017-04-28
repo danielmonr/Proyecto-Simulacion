@@ -10,7 +10,9 @@ private:
   int NSemestres;
   int Nalumnos;
   int NProfesores;
-  std::vector<Carrera> carreras;
+  int num_drops;
+  int root;
+  std::vector<Carrera*> carreras;
 public:
   Institucion(int, int, int, int);
   ~Institucion();

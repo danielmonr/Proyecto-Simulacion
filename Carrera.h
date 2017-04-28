@@ -2,26 +2,30 @@
 #include <stdlib.h>
 #include <vector>
 #include <utility>
-#include "Semestre.h"
+#include "Alumno.h"
 #include "helpers.h"
 
 class Carrera{
 private:
-  std::vector<Semestre*> semestres;
   int init_al;
   int num_semestres;
   int num_alumnos_semestre;
-  int id;
+
   //std::vector<std::pair<float, int>> matrix;
   int num_filas;
   int lim_inf;
   int lim_sup;
 public:
+  int num_reprobados;
+  int num_expulsados;
+  int num_graduados;
+  int id;
+  std::vector<Alumno*> alumnos;
   Carrera(int, int, int);
   ~Carrera();
   void AvanzarSemestre();
   int alpha();
-  int AlumnosNuevoIngreso();
+  void AlumnosNuevoIngreso();
   void printInfo();
   void CrearTabla();
 };

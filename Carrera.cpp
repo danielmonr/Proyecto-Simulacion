@@ -3,9 +3,14 @@
 Carrera::Carrera(int i,int n,int s) : id(i),num_semestres(n), num_alumnos_semestre(s){
   init_al = num_alumnos_semestre;
   for(int i = 0; i < num_semestres; ++i){
-    semestres.push_back(new Semestre(i+1, num_alumnos_semestre));
+    for (int j = 0; j < init_al; ++j){
+      alumnos.push_back(new Alumno(i+1));
+    }
   }
-  CrearTabla();
+  num_reprobados = 0;
+  num_expulsados = 0;
+  num_graduados = 0;
+  //CrearTabla();
 }
 
 Carrera::~Carrera(){
@@ -15,28 +20,30 @@ void Carrera::printInfo(){
   std::cout << "Carrera" << id << " info: " << std::endl;
   std::cout << "\tNumero de Semestres: " << num_semestres << std::endl;
   int sum = 0;
-  for(auto item:semestres){
+  /*for(auto item:semestres){
     std::cout << "\t";
     item->printInfo();
     sum += item->num_alumnos;
-  }
-  std::cout << "\tTotal de Alumnos: " << sum << std::endl;
+  }*/
+  std::cout << "\tTotal de Alumnos: " << alumnos.size() << std::endl;
 }
 
 void Carrera::AvanzarSemestre(){
-  int quedadosSiguiente = alpha();
-  int quedadosPresente = 0;
-  for(int i = semestres.size()-2; i > 0; --i){
-    quedadosPresente = alpha();
-    std::cout << "Alpha de " << i << ": " << quedadosSiguiente << '\n';
-    if(i == semestres.size()-2){
-      std::cout << "Graduados: " << (semestres.at(i+1)->num_alumnos)- quedadosSiguiente << std::endl;
-    }
-    semestres.at(i+1)->num_alumnos = quedadosSiguiente + semestres.at(i)->num_alumnos - quedadosPresente;
-    quedadosSiguiente = quedadosPresente;
+  for (auto al:alumnos){
+    num_reprobados = (al->aprobar())? num_reprobados : num_reprobados+1;
   }
-  //semestres.at(0)->num_alumnos = 0;
-  semestres.at(0)->num_alumnos = AlumnosNuevoIngreso() + quedadosSiguiente;
+  for(int i = 0; i < alumnos.size(); ++i){
+    if(alumnos.at(i)->reprobadas >= 3){
+      alumnos.erase(alumnos.begin() + i);
+      num_expulsados++;
+      i--;
+    }
+    if(alumnos.at(i)->semestre > num_semestres){
+      num_graduados++;
+      alumnos.erase(alumnos.begin() + i);
+      i--;
+    }
+  }
 }
 
 int Carrera::alpha(){
@@ -53,10 +60,13 @@ int Carrera::alpha(){
   return 2;
 }
 
-int Carrera::AlumnosNuevoIngreso(){
+void Carrera::AlumnosNuevoIngreso(){
   srand((int)time(NULL));
   int por = init_al/10;
-  return (rand()%(int)(por*2))+ (init_al - por);
+  int numnuev = (rand()%(int)(por*2))+ (init_al - por);
+  for(int i = 0; i < numnuev; ++i){
+    alumnos.push_back(new Alumno(1));
+  }
 }
 
 void Carrera::CrearTabla(){
