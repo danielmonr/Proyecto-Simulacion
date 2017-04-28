@@ -2,6 +2,7 @@
 
 Alumno::Alumno(int s){
   semestre = s;
+  reprobadas = 0;
 }
 
 bool Alumno::aprobar(){
