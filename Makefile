@@ -17,4 +17,4 @@ simulacion.o: Simulacion.cpp Simulacion.h
 	g++ --std=c++11 -c Simulacion.cpp -o simulacion.o
 
 proy: Inscripciones.cpp simulacion.o alumno.o institucion.o carrera.o
-	g++ --std=c++11 -o proy Inscripciones.cpp simulacion.o alumno.o institucion.o carrera.o
+	g++ --std=c++11 -o proy Inscripciones.cpp simulacion.o alumno.o institucion.o carrera.o -pthread

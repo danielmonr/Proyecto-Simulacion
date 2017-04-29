@@ -2,14 +2,22 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <vector>
+#include <semaphore.h>
 #include "Simulacion.h"
 #include "helpers.h"
 
 using namespace std;
 
-std::vector<Simulacion> sims;
+std::vector<Simulacion*> sims;
+
+pthread_t print_th, getch_th;
+pthread_mutex_t mutex;
+
+char typeprint = 'b';
 
 void CrearSimulaciones(string);
+void* Print(void*);
+void* GetCh(void*);
 
 int main(int argc, char* argv[]){
 	if(argc > 2){
@@ -27,11 +35,18 @@ int main(int argc, char* argv[]){
 	int numsims;
 	cin >> numsims;
 
+	pthread_mutex_lock(&mutex);
+
 	for(auto simulacion:sims){
+		pthread_create(&print_th, 0, Print, (void*)simulacion);
+		pthread_create(&getch_th, 0, GetCh, NULL);
 		for(int i = 0; i < numsims; ++i){
-			simulacion.CorrerSimulacion();
+			simulacion->CorrerSimulacion();
+			pthread_mutex_unlock(&mutex);
 			sleep(1);
 		}
+		typeprint = 'e';
+		pthread_cancel(getch_th);
 	}
 }
 
@@ -55,7 +70,41 @@ void CrearSimulaciones(string f){
 				temp += line[i];
 			}
 		}
-		sims.push_back(Simulacion(vars[0],vars[1],vars[2], vars[3]));
+		sims.push_back(new Simulacion(vars[0],vars[1],vars[2], vars[3]));
 	}
 	ifs.close();
+}
+
+void* Print(void* v){
+	Simulacion* s = (Simulacion*) v;
+	while (true) {
+		pthread_mutex_lock(&mutex);
+		switch (typeprint) {
+			case 'b':
+				s->PrintState();
+				break;
+			case 'd':
+				s->DescribeState();
+				break;
+			case 'e':
+				pthread_exit(0);
+				break;
+			default:
+				cout << "Please choose a correct option(b/d).\n";
+				break;
+		}
+	}
+}
+
+void* GetCh(void *v){
+	while(true){
+		cin >> typeprint;
+		if(typeprint == 'b' || typeprint == 'd'){
+			pthread_mutex_unlock(&mutex);
+		}
+		else if(typeprint == 'e'){
+			pthread_mutex_unlock(&mutex);
+			pthread_exit(0);
+		}
+	}
 }

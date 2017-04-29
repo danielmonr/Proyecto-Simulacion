@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "Institucion.h"
 #include "helpers.h"
+#include <pthread.h>
 
 #define HOURS_PER_CLASSR 7
 #define HOURS_PER_CLASS 1
@@ -20,4 +21,6 @@ class Simulacion{
 		~Simulacion();
 		void CorrerSimulacion();
 		void PrintState();
+		void DescribeState();
+
 };

@@ -6,11 +6,14 @@ Alumno::Alumno(int s){
 }
 
 bool Alumno::aprobar(){
-  srand((int) time(NULL));
-  if(rand()%101 > 96){
+  //srand((int) time(NULL));
+  int r = rand()%101;
+  if(r > 96){
     reprobadas++;
+    //std::cout << "R = " << reprobadas << '\n';
     return false;
   }
+  //std::cout << "Rand: " << r << '\n';
   semestre++;
   return true;
 }

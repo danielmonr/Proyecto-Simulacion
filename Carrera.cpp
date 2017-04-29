@@ -37,8 +37,8 @@ void Carrera::AvanzarSemestre(){
   for(int i = 0; i < alumnos.size(); ++i){
     //std::cout << "Alumnos:" << alumnos.size() << " - i: " << i << "\n";
     if(alumnos.at(i)->reprobadas >= 3){
-      //alumnos.erase(alumnos.begin() + i);
-      std::cout << "######################Erase, long:" << alumnos.at(i)->reprobadas << "\n";
+      alumnos.erase(alumnos.begin() + i);
+      //std::cout << "######################Erase, long:" << alumnos.at(i)->reprobadas << "\n";
       num_expulsados++;
       i = (i > 0)? i-1: 0;
     }
